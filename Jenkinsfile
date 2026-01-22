@@ -29,7 +29,7 @@ pipeline {
         stage('Archive') {
             steps {
                 echo 'Archiving'
-		archiveArtifacts artifacts: "build/*", fingerprint: true
+		archiveArtifacts artifacts: "build/libs/**/*.jar", fingerprint: true
             }
         }
         stage('Deploy') {
