@@ -15,17 +15,21 @@ pipeline {
 	
         stage('Build') {
             steps {
-                echo 'Building'
+                sh 'gradle clean build'
+		echo 'Building'
             }
         }
         stage('Test') {
             steps {
-                echo 'Testing'
+		sh 'gradle test'
+                sh 'gradle jacocoTestReport'
+		 echo 'Testing'
             }
         }
         stage('Archive') {
             steps {
                 echo 'Archiving'
+		archiveArtifacts artifacts: "build/*", fingerprint: true
             }
         }
         stage('Deploy') {
